@@ -11,7 +11,7 @@ interface ConfigType {
         default: string;
         arcade: {
             gravity: {
-                x?: number;
+                x: number;
                 y: number;
             };
             debug: boolean;
@@ -30,7 +30,7 @@ export const config: ConfigType = {
     physics: {
         default: "arcade",
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 300, x: 0 },
             debug: false,
         },
     },
