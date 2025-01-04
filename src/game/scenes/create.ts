@@ -3,6 +3,7 @@ type Sprite = Phaser.Physics.Arcade.Sprite;
 export let player: Sprite;
 let platforms: Phaser.Physics.Arcade.StaticGroup;
 
+let stars: Phaser.Physics.Arcade.Group;
 export default function create(this: Phaser.Scene) {
     // background
     this.add.image(400, 300, "sky");
@@ -42,4 +43,19 @@ export default function create(this: Phaser.Scene) {
 
     // enable collisions between player and platforms
     this.physics.add.collider(player, platforms);
+
+    //stars creation
+    // start creation
+    stars = this.physics.add.group({
+        key: "star",
+        repeat: 11,
+        setXY: { x: 12, y: 0, stepX: 70 },
+    });
+
+    stars.children.iterate(function (child) {
+        child.setBounceY(Phaser.Math.FloatBetween(0.25, 0.3));
+    });
+
+    // enable collisions between ground and stars
+    this.physics.add.collider(stars, platforms);
 }
