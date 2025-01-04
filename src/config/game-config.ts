@@ -3,30 +3,11 @@ import preload from "../game/scenes/preload";
 import create from "../game/scenes/create";
 import update from "../game/scenes/update";
 
-interface ConfigType {
-    type: number;
-    width: number;
-    height: number;
-    physics: {
-        default: string;
-        arcade: {
-            gravity: {
-                x: number;
-                y: number;
-            };
-            debug: boolean;
-        };
-    };
-    scene: {
-        preload: (this: Phaser.Scene) => void;
-        create: (this: Phaser.Scene) => void;
-        update: () => void;
-    };
-}
-export const config: ConfigType = {
+export const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    parent: "game-container",
     physics: {
         default: "arcade",
         arcade: {
