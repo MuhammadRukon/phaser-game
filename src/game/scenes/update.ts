@@ -1,6 +1,6 @@
 type playerBody = Phaser.Physics.Arcade.Body;
 
-import { player } from "./create";
+import { player } from "./create/create";
 
 export default function update(this: Phaser.Scene) {
     let cursors: Phaser.Types.Input.Keyboard.CursorKeys;

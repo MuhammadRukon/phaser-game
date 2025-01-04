@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import preload from "../game/scenes/preload";
-import create from "../game/scenes/create";
+import create from "../game/scenes/create/create";
 import update from "../game/scenes/update";
 
 export const config: Phaser.Types.Core.GameConfig = {
