@@ -3,6 +3,9 @@ type Sprite = Phaser.Physics.Arcade.Sprite;
 export let player: Sprite;
 let platforms: Phaser.Physics.Arcade.StaticGroup;
 
+let score: number = 0;
+let scoreText: Phaser.GameObjects.Text;
+
 let stars: Phaser.Physics.Arcade.Group;
 export default function create(this: Phaser.Scene) {
     // background
@@ -61,7 +64,16 @@ export default function create(this: Phaser.Scene) {
 
     // star collection
     this.physics.add.overlap(player, stars, collectStar, null, this);
-    function collectStar(player, star) {
+    function collectStar(player: Sprite, star: Sprite) {
         star.disableBody(true, true);
+        // update score
+        score += 10;
+        scoreText.setText("Score: " + score);
     }
+
+    //display score
+    scoreText = this.add.text(16, 16, "score: 0", {
+        fontSize: "32px",
+        fill: "#000",
+    });
 }
