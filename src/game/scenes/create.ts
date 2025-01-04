@@ -58,4 +58,10 @@ export default function create(this: Phaser.Scene) {
 
     // enable collisions between ground and stars
     this.physics.add.collider(stars, platforms);
+
+    // star collection
+    this.physics.add.overlap(player, stars, collectStar, null, this);
+    function collectStar(player, star) {
+        star.disableBody(true, true);
+    }
 }
