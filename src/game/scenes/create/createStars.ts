@@ -3,8 +3,8 @@ export function createStars(scene: Phaser.Scene) {
 
     stars = scene.physics.add.group({
         key: "star",
-        repeat: 11,
-        setXY: { x: 12, y: 0, stepX: 70 },
+        repeat: 1,
+        setXY: { x: 310, y: 0, stepX: 70 },
     });
 
     stars.children.iterate(function (child) {

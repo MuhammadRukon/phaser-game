@@ -1,3 +1,4 @@
+import { OVER } from "../../../constants";
 import createPlatforms from "./createPlatforms";
 import { createPlayer } from "./createPlayer";
 import { createStars } from "./createStars";
@@ -72,6 +73,7 @@ export default function create(this: Phaser.Scene) {
     // game over functionality
     function hitBomb(player: Sprite) {
         this.physics.pause();
+        window.postMessage({ type: OVER });
         player.setTint(0xff0000);
         player.anims.play("turn");
         gameOver = true;
