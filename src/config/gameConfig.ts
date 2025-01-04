@@ -2,12 +2,20 @@ import Phaser from "phaser";
 import preload from "../game/scenes/preload";
 import create from "../game/scenes/create/create";
 import update from "../game/scenes/update";
+import { HEIGHT, WIDTH } from "../constants";
 
 export const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: WIDTH,
+    height: HEIGHT,
     parent: "game-container",
+    scale: {
+        mode: Phaser.Scale.FIT,
+        parent: "game-container",
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: WIDTH,
+        height: HEIGHT,
+    },
     physics: {
         default: "arcade",
         arcade: {

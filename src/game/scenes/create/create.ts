@@ -1,4 +1,4 @@
-import { OVER } from "../../../constants";
+import { HEIGHT, OVER, WIDTH } from "../../../constants";
 import createPlatforms from "./createPlatforms";
 import { createPlayer } from "./createPlayer";
 import { createStars } from "./createStars";
@@ -8,10 +8,9 @@ type GroupType = Phaser.Physics.Arcade.Group;
 
 export let player: Sprite;
 let platforms: Phaser.Physics.Arcade.StaticGroup;
-
+let highScore: string = localStorage.getItem("highScore") || "0";
 let score: number = 0;
 let scoreText: Phaser.GameObjects.Text;
-
 let stars: GroupType;
 let bomb: Sprite;
 let bombs: GroupType;
@@ -19,7 +18,7 @@ let gameOver: boolean = false;
 
 export default function create(this: Phaser.Scene) {
     // background
-    this.add.image(400, 300, "sky");
+    this.add.image(WIDTH / 2, HEIGHT / 2, "sky").setDisplaySize(WIDTH, HEIGHT);
 
     //player creation
     player = createPlayer(this);
@@ -50,7 +49,9 @@ export default function create(this: Phaser.Scene) {
 
         // score calculation
         score += 10;
-        scoreText.setText("Score: " + score);
+
+        highScore = score > parseInt(highScore) ? score.toString() : highScore;
+        scoreText.setText(`Score: ${score}; highscore: ${highScore}`);
 
         // create more stars and bomb
         if (stars.countActive(true) === 0) {
@@ -74,13 +75,14 @@ export default function create(this: Phaser.Scene) {
     function hitBomb(player: Sprite) {
         this.physics.pause();
         window.postMessage({ type: OVER });
+        // score = 0;
         player.setTint(0xff0000);
         player.anims.play("turn");
         gameOver = true;
     }
 
-    //display score
-    scoreText = this.add.text(16, 16, "score: 0", {
+    // display score
+    scoreText = this.add.text(16, 16, `score: 0; highscore: ${highScore}`, {
         fontSize: "32px",
         fill: "#000",
     });

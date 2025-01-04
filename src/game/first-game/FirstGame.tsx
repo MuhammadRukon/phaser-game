@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { config } from "../../config/game-config";
+import { config } from "../../config/gameConfig";
 import { OVER, START } from "../../constants";
+import Button from "../../components/button/Button";
+import { buttonConfig } from "../../config/buttonConfig";
 
 export default function FirstGame() {
     const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -21,26 +23,31 @@ export default function FirstGame() {
                 setIsRunning(true);
             }
         };
-
         window.addEventListener("message", handleGame);
 
         return () => window.removeEventListener("message", handleGame);
     }, []);
+
     return (
         <div id="game-container">
             {!isRunning && (
-                <button
-                    style={{
-                        position: "absolute",
-                        top: "70%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        whiteSpace: "nowrap",
-                    }}
-                    onClick={startGame}
-                >
-                    Start Game
-                </button>
+                <>
+                    <p
+                        style={{
+                            color: "black",
+                            fontSize: "32px",
+                            textAlign: "center",
+                            position: "absolute",
+                            top: "40%",
+                            left: "50%",
+                            zIndex: 0,
+                            transform: "translateX(-50%)",
+                        }}
+                    >
+                        Keyboard only
+                    </p>
+                    <Button config={buttonConfig} handleClick={startGame} />
+                </>
             )}
         </div>
     );
