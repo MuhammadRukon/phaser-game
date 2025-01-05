@@ -22,6 +22,7 @@ const gameStats: stat = {
 };
 
 export default function create(this: Phaser.Scene) {
+    highScore = localStorage.getItem("highScore") || "0";
     // background
     this.add.image(WIDTH / 2, HEIGHT / 2, "sky").setDisplaySize(WIDTH, HEIGHT);
 

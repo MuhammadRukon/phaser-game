@@ -7,6 +7,11 @@ export default function gameOverHandler(
     gameStats: stat
 ) {
     scene.physics.pause();
+    const storedHighscore = localStorage.getItem("highScore");
+
+    if (!storedHighscore || parseInt(storedHighscore) < gameStats.score) {
+        localStorage.setItem("highScore", gameStats.score.toString());
+    }
     window.postMessage({ type: OVER });
     gameStats.score = 0;
     player.setTint(0xff0000);
